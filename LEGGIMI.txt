@@ -1,0 +1,71 @@
+FBTECH MUSIC TECH PER WINDOWS 11  -  versione 1.0.0 (T37)
+===========================================================
+
+COS'E'
+Un'app per Windows 11 che apre FBTECH Music Tech (Studio multitraccia, Console DJ, Accordatore, Metronomo, Laura, Banco) in una finestra tutta sua,
+con la sua icona sul desktop e nel menu Start. Funziona con QUALSIASI scheda audio che Windows riconosce (integrata, USB, Bluetooth, interfacce audio).
+La latenza, in questa versione, e' quella normale di Windows (come nel browser): ce ne occuperemo dopo.
+
+COSA CAMBIA RISPETTO AL BROWSER
+- Finestra dedicata con icona: non si perde tra le schede del browser.
+- Microfono e MIDI concessi al sito una volta per tutte (la telecamera, la posizione e tutto il resto restano SEMPRE negati).
+- L'audio non rallenta quando riduci a icona o copri la finestra (importante per DJ e metronomo) e parte senza dover cliccare prima.
+- Il computer non va in stop mentre l'app e' aperta.
+- Ricorda dimensione, posizione, schermo e zoom (e non compare mai fuori dallo schermo se togli un monitor).
+- Senza Internet mostra una pagina chiara con "Riprova ora" e riprova da sola quando la rete torna.
+- Menu in italiano con scorciatoie: Ctrl+1 Studio, Ctrl+2 Accordatore, Ctrl+3 Metronomo, Ctrl+4 Console DJ, Ctrl+5 Laura, Ctrl+6 Banco, Ctrl+7 Account,
+  F11 schermo intero, Ctrl+R ricarica, Ctrl +/- zoom. Menu "Audio e MIDI": apre le impostazioni audio di Windows e la privacy del microfono.
+- Carica SEMPRE il sito vero: conti, piani e aggiornamenti sono quelli online, subito. I link ad altri siti si aprono nel browser normale.
+
+COSA NON CAMBIA (LIMITI ONESTI)
+- Serve Internet: l'app apre il sito online. Non c'e' ancora l'uso senza rete.
+- La latenza audio e' quella di Windows, come nel browser.
+- NON HO POTUTO PROVARLA SU WINDOWS: qui non ho Windows. Ho provato tutta la logica (74 controlli) facendo girare il programma contro un "finto Electron",
+  e la pagina "nessuna connessione" nel browser (16 controlli). La prima prova vera sul tuo PC la fai tu (vedi sotto).
+- Non e' "firmata" (il certificato costa): Windows mostra "Windows ha protetto il PC". Clic su "Ulteriori informazioni" > "Esegui comunque".
+- I progetti salvati nel BROWSER non compaiono nell'app (ogni programma ha il suo spazio). Per spostarli: nel browser, Studio > Progetti > "Salva un file (.fbproj)";
+  nell'app, Studio > Progetti > "Apri un file". Vale anche al contrario.
+
+COME OTTENERE L'INSTALLATORE (non devi installare nulla sul PC: lo costruisce GitHub, gratis)
+1) Crea un account gratuito su https://github.com
+2) Crea un nuovo "repository": nome  fbtech-app-windows , scegli PRIVATO (Private). Non aggiungere README.
+3) Estrai questo zip in una cartella. Poi in GitHub: "uploading an existing file" e trascina il CONTENUTO della cartella (main.js, package.json, src, tests, build,
+   offline.html... E la cartella .github). Premi "Commit changes".
+   Se la cartella .github non si carica: "Add file" > "Create new file", nel nome scrivi  .github/workflows/build.yml  e incolla il contenuto del file build.yml.
+4) Clicca "Actions". Se non e' partita da sola, scegli "Compila FBTECH Music Tech per Windows" > "Run workflow".
+5) Aspetta qualche minuto: compare una spunta verde. Apri la compilazione, in fondo c'e' "Artifacts": scarica  FBTECH-Music-Tech-Windows  (e' uno zip).
+   Dentro ci sono DUE file: ...-Installatore.exe (si installa) e ...-Portatile.exe (un solo file, senza installare).
+6) SE VEDI UNA X ROSSA: apri il passaggio che e' fallito e mandami le ultime righe del testo (o una foto). Il primo tentativo puo' avere qualcosa da correggere:
+   la compilazione usa le ULTIME versioni di Electron e dell'installatore, e io non ho potuto provarla su Windows.
+   Nel passaggio "Versioni usate" trovi i numeri delle versioni: segnatameli.
+
+INSTALLAZIONE
+- Doppio clic sull'Installatore. Si installa solo per il tuo utente (non servono i diritti di amministratore), in italiano, con icona sul desktop e nel menu Start.
+- Se Windows dice "Windows ha protetto il PC": Ulteriori informazioni > Esegui comunque.
+- Disinstallare: Impostazioni > App. I dati restano in  %APPDATA%\FBTECH Music Tech  (cancellali a mano se vuoi ripartire da zero).
+
+PRIMA PROVA (10 minuti, mi servono i risultati)
+a) Apri l'app: vedi il sito? Entra con il tuo account.
+b) Studio > Audio (ingranaggio): vedi la tua scheda come ingresso e uscita? Registra 5 secondi: si sente?
+c) Se hai una tastiera MIDI: la vede? (menu Audio e MIDI > Privacy del microfono se il microfono e' bloccato da Windows.)
+d) Console DJ: carica un brano demo, premi play, poi RIDUCI A ICONA per 30 secondi: l'audio continua senza scatti?
+e) Scollega il Wi-Fi e premi Ctrl+R: compare "Non riesco a collegarmi"? Ricollega: riparte da sola?
+f) Chiudi e riapri: la finestra torna dove era? Prova una seconda apertura mentre e' aperta: porta davanti quella esistente?
+g) Prova Ctrl+1... Ctrl+7, F11, lo zoom e il menu Aiuto > Informazioni.
+Dimmi cosa non va (anche una foto dello schermo).
+
+DOVE SONO I DATI E COME CAMBIARE SITO (per prove)
+- Dati e impostazioni: %APPDATA%\FBTECH Music Tech  (menu Aiuto > Apri la cartella dei dati).
+- Per provare un altro indirizzo (ad esempio un sito di prova), crea in quella cartella un file  fbtech-config.json  con dentro:  {"url":"https://indirizzo-di-prova.it"}
+  (solo https, oppure http solo per localhost). Oppure avvia con  --url=https://...
+
+PER CHI SVILUPPA
+  npm install      (scarica i componenti)
+  npm start        (apre l'app per provarla)
+  npm test         (prove: non serve Electron ne' Internet)
+  npm run dist     (crea installatore e versione portatile in dist/)
+
+PROSSIMI PASSI (NON FATTI)
+- uso senza Internet con copia locale del sito; - firma dell'app (facoltativa, a pagamento); - aggiornamenti automatici dell'app;
+- motore audio nativo (ASIO/WASAPI esclusivo) per la latenza minima: la misura con la tua Yamaha AG03 aveva dato 6 ms in loopback con ASIO.
+  Nota licenza: ASIO e' ora disponibile sia con licenza GPLv3 sia con accordo gratuito di Steinberg.

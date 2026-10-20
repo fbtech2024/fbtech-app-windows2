@@ -1,0 +1,26 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FBTECH Music Tech - nessuna connessione</title>
+<style>
+:root{color-scheme:dark;--bg:#06111c;--ink:#e9f7ff;--mut:#8fb4c9;--a:#38e7ff;--line:rgba(90,190,255,.35)}
+@media (prefers-color-scheme:light){:root{color-scheme:light;--bg:#eef6fb;--ink:#0b2233;--mut:#46657a;--a:#0a7fa8;--line:rgba(10,127,168,.4)}}
+html,body{height:100%;margin:0}body{display:grid;place-items:center;background:radial-gradient(1200px 700px at 50% -10%,rgba(56,231,255,.12),transparent),var(--bg);color:var(--ink);font:16px/1.5 system-ui,Segoe UI,sans-serif;padding:24px;box-sizing:border-box}
+main{max-width:560px;text-align:center}.logo{font:900 1.5rem system-ui;letter-spacing:.08em}.logo b{color:var(--a)}h1{margin:.6em 0 .3em;font-size:1.4rem}p{color:var(--mut);margin:.4em 0}
+button{margin-top:18px;min-height:46px;padding:10px 28px;border-radius:12px;border:1px solid var(--a);background:var(--a);color:#021018;font:inherit;font-weight:800;cursor:pointer}button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+ul{text-align:left;color:var(--mut);margin:16px auto 0;padding-left:1.2em;max-width:440px}code{font-size:.85em;word-break:break-all;color:var(--ink)}#st{min-height:1.4em;margin-top:12px;color:var(--a);font-weight:700}
+</style></head><body><main role="main">
+<div class="logo">FB<b>TECH</b> Music Tech</div>
+<h1>Non riesco a collegarmi al sito</h1>
+<p>Serve una connessione a Internet per aprire <code id="u">il sito</code>. Appena torna la rete provo da solo.</p>
+<button id="retry" type="button" autofocus>Riprova ora</button><div id="st" role="status" aria-live="polite"></div>
+<ul><li>Controlla che il Wi-Fi o il cavo di rete siano collegati.</li><li>Se usi una VPN o un blocco pubblicità, prova a disattivarli per un momento.</li><li>I tuoi progetti salvati restano nell'app: li ritrovi appena ti ricolleghi.</li></ul>
+</main><script>
+(function(){
+  var q=new URLSearchParams(location.search), target=q.get('url')||'', ok=false;
+  try{var t=new URL(target); ok=(t.protocol==='https:'||t.protocol==='http:');}catch(e){}
+  var u=document.getElementById('u'), st=document.getElementById('st'), n=0;
+  if(ok){u.textContent=target;}
+  function go(){ if(!ok){st.textContent='Indirizzo non valido: chiudi e riapri l\u2019app.';return;} st.textContent='Provo a collegarmi\u2026'; setTimeout(function(){location.href=target;},150); }
+  document.getElementById('retry').addEventListener('click',go);
+  window.addEventListener('online',go);
+  setInterval(function(){ if(navigator.onLine&&ok&&++n<=40) go(); },15000);
+})();
+</script></body></html>

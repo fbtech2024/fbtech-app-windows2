@@ -1,0 +1,70 @@
+{
+  "name": "fbtech-music-tech",
+  "productName": "FBTECH Music Tech",
+  "version": "1.0.0",
+  "description": "FBTECH Music Tech per Windows: studio multitraccia, console DJ, accordatore e metronomo con qualsiasi scheda audio.",
+  "main": "main.js",
+  "author": "FBTECH",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node tests/run.js",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest"
+  },
+  "build": {
+    "appId": "it.faustoborriello.fbtech.music",
+    "productName": "FBTECH Music Tech",
+    "copyright": "FBTECH",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "offline.html",
+      "src/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "electronLanguages": [
+      "it",
+      "en-US"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FBTECH Music Tech",
+      "language": "1040",
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "FBTECH-Music-Tech-${version}-Installatore.${ext}"
+    },
+    "portable": {
+      "artifactName": "FBTECH-Music-Tech-${version}-Portatile.${ext}"
+    }
+  }
+}
