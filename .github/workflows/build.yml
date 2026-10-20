@@ -1,0 +1,28 @@
+name: Compila FBTECH Music Tech per Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prove (non servono componenti esterni)
+        run: node tests/run.js
+      - name: Installa i componenti
+        run: npm install --no-audit --no-fund
+      - name: Versioni usate (da copiare nel registro)
+        run: |
+          npx electron --version
+          npx electron-builder --version
+      - name: Crea installatore e versione portatile
+        run: npm run dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FBTECH-Music-Tech-Windows
+          path: dist/*.exe
+          if-no-files-found: error
